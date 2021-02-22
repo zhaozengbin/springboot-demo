@@ -1,0 +1,19 @@
+server:
+    port: 10000
+logging:
+    level:
+        root: debug
+sensitive:
+    filter:
+        fast:
+            enable: true
+        jack:
+            enable: true
+        undo:
+            enable: true
+        encryption:
+            enable: true
+            encryption-key:
+                aes: "5fdb2b224cea49398509a639" # 24位编码
+                des: "5fdb2b224cea49398509a639" # 24位编码
+                sm4: "5fdb2b224cea4939" # 16为编码

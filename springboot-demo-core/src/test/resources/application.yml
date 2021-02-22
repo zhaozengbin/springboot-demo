@@ -1,0 +1,23 @@
+server:
+  port: 1986
+  tomcat:
+    uri-encoding: utf-8
+devtools:
+  restart:
+    #热部署生效
+    enabled: true
+    #设置重启的目录
+    additional-paths: resources/**,static/**,templates/**
+    #该目录下的内容修改不重启
+    exclude: data/**
+spring:
+  application:
+    name: spring-demo-examples
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html

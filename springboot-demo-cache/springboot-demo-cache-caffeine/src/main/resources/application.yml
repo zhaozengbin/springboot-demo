@@ -1,0 +1,7 @@
+spring:
+  cache:
+    type: caffeine
+    cache-names:
+      - userCache
+    caffeine:
+      spec: initialCapacity=50,maximumSize=500,expireAfterWrite=10s,refreshAfterWrite=5s # 需要配合 CacheLoader

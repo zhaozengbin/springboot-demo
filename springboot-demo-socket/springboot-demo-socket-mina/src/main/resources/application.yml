@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: springboot-demo-socket-mina
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+socket:
+  mina:
+    port: 19861

@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: es-demo
+  elasticsearch:
+    rest:
+      username: elastic
+      password: elastic
+      uris: http://172.16.20.20:9200  #es
+

@@ -1,0 +1,13 @@
+server:
+  port: 1986
+spring:
+  application:
+    name: springboot-demo-socket-basic
+  thymeleaf:
+    cache: false
+    mode: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
