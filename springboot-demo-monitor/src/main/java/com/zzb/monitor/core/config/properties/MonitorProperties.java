@@ -33,9 +33,13 @@ public class MonitorProperties {
 
     private static final String EXCEPTION_THRESHOLD_KEY = "threshold";
 
-    private static final String EXCEPTION_DINGDING_URL_KEY = "dingding.token";
+    private static final String EXCEPTION_DINGDING_TOKEN_KEY = "dingding.token";
+
+    private static final String EXCEPTION_DINGDING_SIGN_KEY = "dingding.sign";
 
     private static final String EXCEPTION_DINGDING_AT_KEY = "dingding.at";
+
+    private static final String EXCEPTION_DINGDING_AT_ALL_KEY = "dingding.atAll";
 
     private static Properties properties = null;
 
@@ -61,8 +65,16 @@ public class MonitorProperties {
         return getPropertiesValue(exception, EXCEPTION_THRESHOLD_KEY) == null ? Integer.parseInt(getPropertiesValue(DEFAULT_KEY, EXCEPTION_THRESHOLD_KEY)) : Integer.parseInt(getPropertiesValue(exception, EXCEPTION_THRESHOLD_KEY));
     }
 
-    public static String getDingdingUrl(String exception) {
-        return getPropertiesValue(exception, EXCEPTION_DINGDING_URL_KEY) == null ? getPropertiesValue(DEFAULT_KEY, EXCEPTION_DINGDING_URL_KEY) : getPropertiesValue(exception, EXCEPTION_DINGDING_URL_KEY);
+    public static String getDingdingToken(String exception) {
+        return getPropertiesValue(exception, EXCEPTION_DINGDING_TOKEN_KEY) == null ? getPropertiesValue(DEFAULT_KEY, EXCEPTION_DINGDING_TOKEN_KEY) : getPropertiesValue(exception, EXCEPTION_DINGDING_TOKEN_KEY);
+    }
+
+    public static String getDingdingSign(String exception) {
+        return getPropertiesValue(exception, EXCEPTION_DINGDING_SIGN_KEY) == null ? getPropertiesValue(DEFAULT_KEY, EXCEPTION_DINGDING_SIGN_KEY) : getPropertiesValue(exception, EXCEPTION_DINGDING_SIGN_KEY);
+    }
+
+    public static String getDingdingAtAll(String exception) {
+        return getPropertiesValue(exception, EXCEPTION_DINGDING_AT_ALL_KEY) == null ? getPropertiesValue(DEFAULT_KEY, EXCEPTION_DINGDING_AT_ALL_KEY) : getPropertiesValue(exception, EXCEPTION_DINGDING_AT_ALL_KEY);
     }
 
     public static List<String> getDingdingAt(String exception) {

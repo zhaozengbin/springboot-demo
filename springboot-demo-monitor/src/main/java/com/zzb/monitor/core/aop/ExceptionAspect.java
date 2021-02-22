@@ -33,7 +33,8 @@ public class ExceptionAspect {
     private MethodNodeService methodNodeService;
 
 
-    @Pointcut(value = "execution(* com.zzb.*.controller..*(..))")
+    @Pointcut(value = "execution(* com.zzb.*.controller..*(..)) " +
+            "&& !@annotation(org.aspectj.lang.annotation.Aspect)")
     private void pointcut() {
     }
 

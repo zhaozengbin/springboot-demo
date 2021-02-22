@@ -18,7 +18,8 @@ public class ProjectTreeAspect {
     //声明切点
     @Pointcut("execution(* com.zzb..*.*(..))" +
             " && !execution(* com.zzb.monitor..*.*(..))" +
-            " && !@annotation(org.springframework.context.annotation.Bean)")
+            " && !@annotation(org.springframework.context.annotation.Bean)" +
+            " && !@annotation(org.aspectj.lang.annotation.Aspect)")
     public void pointcut() {
     }
 

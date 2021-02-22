@@ -5,9 +5,13 @@ monitor:
       threshold: 2
       dingding:
         token: xxx
+        sign: xxx
         at: 123
+        atAll: true
     NullPointerException:
       threshold: 1
       dingding:
         token: xxx
+        sign: xxx
         at: 123
+        atAll: true
