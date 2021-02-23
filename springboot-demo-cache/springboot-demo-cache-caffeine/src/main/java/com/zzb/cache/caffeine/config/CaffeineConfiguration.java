@@ -21,7 +21,7 @@ public class CaffeineConfiguration {
     @Autowired
     private CaffeineProperties caffeineProperties;
 
-    @Autowired
+    @Autowired(required = false)
     private CaffeineListener caffeineListener;
 
     /**

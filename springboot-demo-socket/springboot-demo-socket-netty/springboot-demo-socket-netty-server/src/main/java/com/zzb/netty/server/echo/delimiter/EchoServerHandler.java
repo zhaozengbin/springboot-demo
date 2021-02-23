@@ -16,7 +16,7 @@ import io.netty.channel.ChannelHandlerContext;
  */
 public class EchoServerHandler extends ChannelHandlerAdapter {
 
-    private static final Log LOGGER = Log.get(EchoServerHandler.class);
+    private static final Log LOG = Log.get(EchoServerHandler.class);
     /**
      * 计数器
      */
@@ -24,14 +24,14 @@ public class EchoServerHandler extends ChannelHandlerAdapter {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        LOGGER.info("--- [发生异常] 释放资源");
+        LOG.info("--- [发生异常] 释放资源");
         ctx.close();
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
         String body = (String) msg;
-        LOGGER.info("--- [第{}次接收客户端消息] {}", ++counter, body);
+        LOG.info("--- [第{}次接收客户端消息] {}", ++counter, body);
         body += "$_$";
         ByteBuf echo = Unpooled.copiedBuffer(body.getBytes());
         ctx.writeAndFlush(echo);

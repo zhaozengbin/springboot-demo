@@ -65,3 +65,14 @@ koTime:
   pointcut: execution(* com.zzb..*.*(..))
 
 
+cache:
+  caffeine:
+    name: demo
+    initialCapacity: 10
+    maximumSize: 100
+    expireAfterWrite: 10
+  cache2k:
+    name: demo
+    eternal: true
+    entryCapacity: 100
+    expireAfterWrite: 10

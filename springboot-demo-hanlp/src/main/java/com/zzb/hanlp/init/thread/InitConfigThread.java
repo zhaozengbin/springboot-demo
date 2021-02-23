@@ -26,7 +26,7 @@ import static com.hankcs.hanlp.corpus.tag.Nature.*;
  * @Copyright：www.duia.com Inc. All rights reserved.
  */
 public class InitConfigThread implements Runnable {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InitConfigThread.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InitConfigThread.class);
 
     // 词性过滤
     private static final List<Nature> NATURE_FILTER = Arrays.asList(e, o, u, ud, uj, uv, y, w);
@@ -74,12 +74,12 @@ public class InitConfigThread implements Runnable {
             vewModelFile = hanlpCustomizeVecModelFile;
             isReload = true;
         }
-        LOGGER.info(String.format("加载词向量模型[%s]开始,加载文件:[%s]", (preLoading ? "预加载" : "完整加载"), vewModelFile));
+        LOG.info(String.format("加载词向量模型[%s]开始,加载文件:[%s]", (preLoading ? "预加载" : "完整加载"), vewModelFile));
         long startTime = System.currentTimeMillis();
         InitConfig.wordVectorModelInstance(vewModelFile, isReload);
         InitConfig.docVectorModelInstance();
         long endTime = System.currentTimeMillis();
-        LOGGER.info(String.format("加载词向量模型[%s]结束,共花费:%d秒", (preLoading ? "预加载" : "完整加载"), (endTime - startTime) / 1000));
+        LOG.info(String.format("加载词向量模型[%s]结束,共花费:%d秒", (preLoading ? "预加载" : "完整加载"), (endTime - startTime) / 1000));
         loadModelFlag = (preLoading ? 1 : 2);
     }
 }

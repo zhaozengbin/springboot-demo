@@ -17,11 +17,11 @@ import java.util.List;
  */
 public class MessagePackServerHandler extends ChannelHandlerAdapter {
 
-    private static final Log LOGGER = Log.get(MessagePackServerHandler.class);
+    private static final Log LOG = Log.get(MessagePackServerHandler.class);
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        LOGGER.info("--- [发生异常] 释放资源: {}", cause.getMessage());
+        LOG.info("--- [发生异常] 释放资源: {}", cause.getMessage());
         // todo
         ctx.close();
     }
@@ -34,7 +34,7 @@ public class MessagePackServerHandler extends ChannelHandlerAdapter {
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         List<User> userInfo = (List<User>) msg;
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                 "\t├ [接收 ]: {}\n" +
                 "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", userInfo);
     }

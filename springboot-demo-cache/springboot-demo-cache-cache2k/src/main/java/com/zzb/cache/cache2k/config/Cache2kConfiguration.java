@@ -23,13 +23,12 @@ public class Cache2kConfiguration {
     @Autowired
     private ApplicationContext applicationContext;
 
-    @Autowired
+    @Autowired(required = false)
     private Cache2kListener cache2kListener;
 
     @Bean("cache2kCacheSpringManager")
     public SpringCache2kCacheManager cache2kCacheManager() {
-        SpringCache2kCacheManager springCache2kCacheManager = new SpringCache2kCacheManager(
-                StrUtil.isEmpty(cache2kProperties.getCacheManagerName()) ? "cache2k-" + applicationContext.getId() : cache2kProperties.getCacheManagerName());
+        SpringCache2kCacheManager springCache2kCacheManager = new SpringCache2kCacheManager("cache2k-" + applicationContext.getId());
         springCache2kCacheManager.addCaches(b ->
                 b.name(cache2kProperties.getCacheName())
                         .eternal(cache2kProperties.isEternal())

@@ -27,7 +27,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> {
 
-    private static final Log LOGGER = Log.get(WebSocketServerHandler.class);
+    private static final Log LOG = Log.get(WebSocketServerHandler.class);
 
     private WebSocketServerHandshaker socketServerHandShaker;
 
@@ -58,7 +58,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     @Override
     public void channelActive(ChannelHandlerContext channelHandlerContext) {
         // 使用一个结构存储通道
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                         "\t├ [建立连接]: client [{}]\n" +
                         "\t├ [当前在线人数]: {}\n" +
                         "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", channelHandlerContext.channel().remoteAddress()
@@ -77,17 +77,17 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
     @Override
     public void channelInactive(ChannelHandlerContext channelHandlerContext) {
         Channel channel = channelHandlerContext.channel();
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                 "\t├ [断开连接]：client [{}]\n" +
                 "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", channel.remoteAddress());
         WebSocketUsers.remove(channel);
         ConcurrentMap<String, Channel> users = WebSocketUsers.getUSERS();
-        LOGGER.info("\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓");
+        LOG.info("\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓");
         for (String s : users.keySet()) {
-            LOGGER.info(
+            LOG.info(
                     "\t├ [当前在线]: {}", s);
         }
-        LOGGER.info("\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓");
+        LOG.info("\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓");
     }
 
     /**
@@ -116,7 +116,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
      */
     @Override
     protected void messageReceived(ChannelHandlerContext ctx, Object msg) throws Exception {
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                 "\t├ [收到客户端消息类型]: {} - {}\n" +
                 "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", msg.getClass(), msg.toString());
         // 传统http接入 第一次需要使用http建立握手
@@ -173,7 +173,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         Channel channel = channelHandlerContext.channel();
         // region 判断是否是关闭链路的指令
         if (frame instanceof CloseWebSocketFrame) {
-            LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+            LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                     "\t├ [关闭与客户端的链接]\n" +
                     "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓");
             socketServerHandShaker.close(channel, (CloseWebSocketFrame) frame.retain());
@@ -182,7 +182,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         // endregion
         // region 判断是否是ping消息
         if (frame instanceof PingWebSocketFrame) {
-            LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+            LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                     "\t├ [Ping消息]\n" +
                     "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓");
             channel.write(new PongWebSocketFrame(frame.content().retain()));
@@ -198,7 +198,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
         if (frame instanceof BinaryWebSocketFrame) {
             BinaryWebSocketFrame binaryWebSocketFrame = (BinaryWebSocketFrame) frame;
             ByteBuf content = binaryWebSocketFrame.content();
-            LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+            LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                     "\t├ [二进制数据]:{}\n" +
                     "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", content);
             final int length = content.readableBytes();
@@ -208,7 +208,7 @@ public class WebSocketServerHandler extends SimpleChannelInboundHandler<Object> 
             List<Object> list = new ArrayList<>();
             list.add(messagePack.read(array));
             for (Object o : list) {
-                LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+                LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                         "\t├ [解码数据]: {}\n" +
                         "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", o);
             }

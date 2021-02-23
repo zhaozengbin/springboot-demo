@@ -14,7 +14,7 @@ import java.io.*;
  */
 public class ObjectSerializerUtils {
 
-    private static final Log LOGGER = Log.get(ObjectSerializerUtils.class);
+    private static final Log LOG = Log.get(ObjectSerializerUtils.class);
 
     /**
      * 方法：deSerilizer
@@ -33,12 +33,12 @@ public class ObjectSerializerUtils {
                 ObjectInputStream ois = new ObjectInputStream(bis);
                 return ois.readObject();
             } catch (Exception e) {
-                LOGGER.info("[异常信息] {}", e.getMessage());
+                LOG.info("[异常信息] {}", e.getMessage());
                 e.printStackTrace();
             }
             return null;
         } else {
-            LOGGER.info("[反序列化] 入参为空");
+            LOG.info("[反序列化] 入参为空");
             return null;
         }
     }

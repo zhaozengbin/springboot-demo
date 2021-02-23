@@ -16,15 +16,15 @@ import org.slf4j.LoggerFactory;
  */
 public class AroundMethod {
 
-    private final static Log LOGGER = Log.get(AroundMethod.class);
+    private final static Log LOG = Log.get(AroundMethod.class);
 
     public static void playBeforeMethod(ProceedingJoinPoint pjp, int identify) {
-        LOGGER.debug("AroundMethodBefore " + pjp.getSignature().getDeclaringTypeName() + " " + pjp.getSignature().getName());
+        LOG.debug("AroundMethodBefore " + pjp.getSignature().getDeclaringTypeName() + " " + pjp.getSignature().getName());
         BuriedPoint.before(pjp, identify);
     }
 
     public static void playAfterMethod(ProceedingJoinPoint pjp, int identify, Object obj) {
-        LOGGER.debug("AroundMethodAfter " + pjp.getSignature().getDeclaringTypeName() + " " + pjp.getSignature().getName());
+        LOG.debug("AroundMethodAfter " + pjp.getSignature().getDeclaringTypeName() + " " + pjp.getSignature().getName());
         BuriedPoint.after(identify, obj != null ? obj.getClass().getName() : null);
     }
 

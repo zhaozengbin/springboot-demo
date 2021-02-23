@@ -20,7 +20,7 @@ import java.util.Date;
  */
 public class TimeServerHandler extends ChannelHandlerAdapter {
 
-    private static final Log LOGGER = Log.get(TimeServerHandler.class);
+    private static final Log LOG = Log.get(TimeServerHandler.class);
     /**
      * 模拟粘包/拆包问题计数器
      */
@@ -45,7 +45,7 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
         // region 解决模拟粘包/拆包问题相关代码
         String body = (String) msg;
-        LOGGER.info("--- [接收到的数据] {} | [counter] {}", body, ++counter);
+        LOG.info("--- [接收到的数据] {} | [counter] {}", body, ++counter);
         String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
         currentTime = currentTime + System.getProperty("line.separator");
         ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());

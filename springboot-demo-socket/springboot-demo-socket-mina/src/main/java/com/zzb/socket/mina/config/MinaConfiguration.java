@@ -29,7 +29,7 @@ import java.nio.charset.Charset;
 @Configuration
 public class MinaConfiguration {
 
-    private static final Log LOGGER = Log.get(MinaConfiguration.class);
+    private static final Log LOG = Log.get(MinaConfiguration.class);
 
     @Autowired
     private MinaProperties minaProperties;
@@ -55,7 +55,7 @@ public class MinaConfiguration {
         acceptor.getSessionConfig().setIdleTime(IdleStatus.BOTH_IDLE, 10);
         SocketAddress addresses = new InetSocketAddress(minaProperties.getPort());
         acceptor.bind(new SocketAddress[]{addresses});
-        LOGGER.info("=====================> Mina服务器在端口：" + minaProperties.getPort() + "已经启动!");
+        LOG.info("=====================> Mina服务器在端口：" + minaProperties.getPort() + "已经启动!");
         return acceptor;
     }
 

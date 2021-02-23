@@ -17,7 +17,7 @@ import java.util.List;
  * 修改备注：TODO
  */
 public class MsgPackDecoder extends MessageToMessageDecoder<ByteBuf> {
-    private static final Log LOGGER = Log.get(MsgPackDecoder.class);
+    private static final Log LOG = Log.get(MsgPackDecoder.class);
 
     /**
      * 方法：decode
@@ -33,7 +33,7 @@ public class MsgPackDecoder extends MessageToMessageDecoder<ByteBuf> {
     @Override
     protected void decode(ChannelHandlerContext channelHandlerContext
             , ByteBuf msg, List<Object> out) throws Exception {
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                 "\t├ [解码]: {}\n" +
                 "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", msg);
         final int length = msg.readableBytes();
@@ -41,7 +41,7 @@ public class MsgPackDecoder extends MessageToMessageDecoder<ByteBuf> {
         msg.getBytes(msg.readerIndex(), array, 0, length);
         MessagePack messagePack = new MessagePack();
         out.add(messagePack.read(array));
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                 "\t├ [out]: {}\n" +
                 "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", out);
     }

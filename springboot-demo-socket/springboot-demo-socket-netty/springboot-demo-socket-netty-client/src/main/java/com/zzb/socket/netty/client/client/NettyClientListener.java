@@ -21,7 +21,7 @@ import javax.annotation.Resource;
 @Component
 public class NettyClientListener implements CommandLineRunner {
 
-    private static final Log LOGGER = Log.get(NettyClientListener.class);
+    private static final Log LOG = Log.get(NettyClientListener.class);
 
     /**
      * netty客户端配置
@@ -36,7 +36,7 @@ public class NettyClientListener implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        LOGGER.info("{} -> [准备进行与服务端通信]", this.getClass().getName());
+        LOG.info("{} -> [准备进行与服务端通信]", this.getClass().getName());
         // region 模拟RPC场景
         Thread t1 = new Thread(() -> {
             try {

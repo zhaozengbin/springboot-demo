@@ -31,7 +31,7 @@ public class ChannelUtil {
     /**
      * ChannelUtil日志输出
      */
-    private static final Logger LOGGER = LoggerFactory.getLogger(ChannelUtil.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ChannelUtil.class);
     /**
      * 用于记录通道响应的结果集
      */
@@ -92,7 +92,7 @@ public class ChannelUtil {
      */
     public static void registerChannel(Channel channel) {
         ChannelId id = channel.id();
-        LOGGER.info("{} -> [添加通道] {}", ChannelUtil.class.getName(), id);
+        LOG.info("{} -> [添加通道] {}", ChannelUtil.class.getName(), id);
         CHANNELS.add(channel);
     }
 
@@ -108,18 +108,18 @@ public class ChannelUtil {
      */
     public static void remoteCall(MethodInvokeMeta methodInvokeMeta, String key) {
 
-        LOGGER.info("{} -> [远程调用] ", ChannelUtil.class.getName());
+        LOG.info("{} -> [远程调用] ", ChannelUtil.class.getName());
         Iterator<Channel> iterator = CHANNELS.iterator();
         Channel channel;
         if (iterator.hasNext()) {
             channel = iterator.next();
         } else {
-            LOGGER.error("{} -> [没有活跃的通道] ", ChannelUtil.class);
+            LOG.error("{} -> [没有活跃的通道] ", ChannelUtil.class);
             throw new NoUseableChannel("没有活跃的通道");
         }
         // 将用于获取结果的key保存,以通道id为键
         String channelID = channel.id().asLongText();
-        LOGGER.info("{} -> [保存获取结果的key] key - {} 通道id - {}", ChannelUtil.class, key, channelID);
+        LOG.info("{} -> [保存获取结果的key] key - {} 通道id - {}", ChannelUtil.class, key, channelID);
         RESULT_MAP.put(channelID, key);
         ChannelFuture channelFuture = channel.writeAndFlush(methodInvokeMeta);
 //        channelFuture.addListener(ChannelFutureListener.CLOSE);

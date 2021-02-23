@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class DingdingUtils {
-    private static final Log LOGGER = Log.get(DingdingUtils.class);
+    private static final Log LOG = Log.get(DingdingUtils.class);
 
     private static final String DINGDING_URL = "https://oapi.dingtalk.com/robot/send?access_token=%s";
     private static final String DINGDING_URL_SIGN = "&timestamp=%d&sign=%s";
@@ -40,7 +40,7 @@ public class DingdingUtils {
         request.setAt(at);
         try {
             OapiRobotSendResponse response = client.execute(request);
-            LOGGER.info("dingding 发送结果:" + JSON.toJSONString(response));
+            LOG.info("dingding 发送结果:" + JSON.toJSONString(response));
         } catch (ApiException e) {
             e.printStackTrace();
         }

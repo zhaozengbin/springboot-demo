@@ -18,7 +18,7 @@ import java.util.Date;
  */
 public class TimeServerHandler extends ChannelHandlerAdapter {
 
-    private static final Log LOGGER = Log.get(TimeServerHandler.class);
+    private static final Log LOG = Log.get(TimeServerHandler.class);
     /**
      * 模拟粘包/拆包问题计数器
      */
@@ -47,14 +47,14 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
         byte[] req = new byte[buf.readableBytes()];
         buf.readBytes(req);
         String body = new String(req, "utf-8");
-        LOGGER.info("--- [接收到的数据] {}", body);
+        LOG.info("--- [接收到的数据] {}", body);
         String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString() :
                 "BAD ORDER";
         ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
 
         // region 模拟粘包/拆包问题相关代码
 //        String body = new String(req, "utf-8").substring(0, req.length - System.getProperty("line.separator").length());
-//        LOGGER.info("--- [接收到的数据] {} | [counter] {}", body, ++counter);
+//        LOG.info("--- [接收到的数据] {} | [counter] {}", body, ++counter);
 //        String currentTime = "QUERY TIME ORDER".equalsIgnoreCase(body) ? new Date(System.currentTimeMillis()).toString() : "BAD ORDER";
 //        currentTime = currentTime + System.getProperty("line.separator");
 //        ByteBuf resp = Unpooled.copiedBuffer(currentTime.getBytes());
@@ -76,7 +76,7 @@ public class TimeServerHandler extends ChannelHandlerAdapter {
      */
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
-        LOGGER.info("--- [服务器写消息] ");
+        LOG.info("--- [服务器写消息] ");
         // 将消息发送队列中的消息写到SocketChannel中
         ctx.flush(); // --> 将消息写到 SocketChannel 中
     }

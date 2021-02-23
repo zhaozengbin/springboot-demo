@@ -20,7 +20,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 @ServerEndpoint("/ws/{name}")
 public class WebSocketServer {
-    private static final Log LOGGER = Log.get(WebSocketServer.class);
+    private static final Log LOG = Log.get(WebSocketServer.class);
     /**
      * 用来记录当前在线连接数。设计成线程安全的。
      */
@@ -87,7 +87,7 @@ public class WebSocketServer {
      */
     @OnMessage
     public void onMessage(String message) {
-        LOGGER.info("收到消息：" + message);
+        LOG.info("收到消息：" + message);
     }
 
     /**
@@ -103,7 +103,7 @@ public class WebSocketServer {
     @OnError
     public void onError(Session session, Throwable error) {
         try {
-            LOGGER.info("{}:通信发生错误，连接关闭", name);
+            LOG.info("{}:通信发生错误，连接关闭", name);
             webSocketServerMAP.remove(uri);//删除uri对应的连接服务
         } catch (Exception e) {
         }

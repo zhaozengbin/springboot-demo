@@ -22,7 +22,7 @@ import java.util.concurrent.Executors;
  */
 public class BuriedPoint {
 
-    private final static Log LOGGER = Log.get(BuriedPoint.class);
+    private final static Log LOG = Log.get(BuriedPoint.class);
     //自定义线程栈：ThreadId+Stack
     private static final Map<String, Stack<MethodNode>> map = new ConcurrentHashMap<>();
     private static ExecutorService executor = Executors.newSingleThreadExecutor();

@@ -17,7 +17,7 @@ import io.netty.channel.socket.nio.NioSocketChannel;
  */
 public class NettyClient {
 
-    private static final Log LOGGER = Log.get(NettyClient.class);
+    private static final Log LOG = Log.get(NettyClient.class);
 
     private static int retry = 0;
     /**
@@ -51,7 +51,7 @@ public class NettyClient {
     }
 
     public void start() {
-        LOGGER.info("{} -> [启动连接] {}:{}", this.getClass().getName(), url, port);
+        LOG.info("{} -> [启动连接] {}:{}", this.getClass().getName(), url, port);
         bootstrap.handler(new NettyClientHandler());
         ChannelFuture f = bootstrap.connect(url, port);
         try {
@@ -66,7 +66,7 @@ public class NettyClient {
                 } catch (InterruptedException e1) {
                     e1.printStackTrace();
                 }
-                LOGGER.info("第{}次尝试....失败", retry);
+                LOG.info("第{}次尝试....失败", retry);
                 start();
             }
         }

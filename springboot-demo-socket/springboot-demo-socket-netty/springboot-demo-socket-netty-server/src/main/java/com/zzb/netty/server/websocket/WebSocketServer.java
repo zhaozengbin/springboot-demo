@@ -18,7 +18,7 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  */
 public class WebSocketServer {
 
-    private static final Log LOGGER = Log.get(WebSocketServer.class);
+    private static final Log LOG = Log.get(WebSocketServer.class);
 
     public void run(int port) throws Exception {
         EventLoopGroup bossGroup = new NioEventLoopGroup();
@@ -29,7 +29,7 @@ public class WebSocketServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new WebSocketChildHandler());
             Channel ch = bootstrap.bind(port).sync().channel();
-            LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+            LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                     "\t├ [服务器启动]: {}\n" +
                     "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", port);
             ch.closeFuture().sync();

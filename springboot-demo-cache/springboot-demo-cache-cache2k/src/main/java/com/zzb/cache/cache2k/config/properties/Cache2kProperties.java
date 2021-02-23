@@ -2,6 +2,7 @@ package com.zzb.cache.cache2k.config.properties;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,27 +14,27 @@ import org.springframework.stereotype.Component;
  * 修改备注：TODO
  */
 @Data
-@Component
+@Configuration
 public class Cache2kProperties {
 
-    @Value("${cache2k.manager.name}")
-    private String cacheManagerName;
-
-    @Value("cache2k.cache.name")
+    @Value("${cache.cache2k.name}")
     private String cacheName;
 
     /**
      * 是否持久化
      */
-    @Value("cache2k.cache.eternal")
+    @Value("${cache.cache2k.eternal}")
     private boolean eternal;
     /**
      * 最大条目
      */
-    @Value("cache2k.cache.entryCapacity")
-    private int entryCapacity;
+    @Value("${cache.cache2k.entryCapacity}")
+    private Long entryCapacity;
 
-    @Value("cache2k.cache.expireAfterWrite")
-    private int expireAfterWrite;
+    /**
+     * 生命周期
+     */
+    @Value("${cache.cache2k.expireAfterWrite}")
+    private Long expireAfterWrite;
 
 }

@@ -1,55 +1,58 @@
-# NullPointerException()
+# Exception
 
-## 路径：
+## 项目名：
 
-com.zzb.examples.controller.monitor.ExamplesMonitorController
+spring-demo-examples
 
-## 方法名：**testException**
+## 机器IP：
 
-## 参数信息：
+127.0.0.1
 
-1. 1
+## 异常方法：
 
-## 异常信息：
+### 方法名：**testException**
 
-- NullPointerException
-
-## 追踪信息：
-
-1. com.zzb.examples.controller.monitor.ExamplesMonitorController.testException(ExamplesMonitorController.java:14)
-2. com.zzb.monitor.chain.aop.ProjectTreeAspect.around(ProjectTreeAspect.java:35)
-
-## 出现时间：
-
-2021-02-22 17:30:55
-
-## 链路：
-
-
-## 路径：
+### 路径：
 
 com.zzb.examples.controller.monitor.ExamplesMonitorController
 
-## 方法名：**testException**
-
-## 参数信息：
+### 参数信息：
 
 1. 1
 
-## 异常信息：
+### 追踪信息：
 
-- NullPointerException
+1. com.zzb.examples.service.impl.ExceptionServiceImpl.getException(ExceptionServiceImpl.java:13)
+1. com.zzb.examples.controller.monitor.ExamplesMonitorController.testException(ExamplesMonitorController.java:17)
+1. com.zzb.monitor.chain.aop.ProjectTreeAspect.around(ProjectTreeAspect.java:36)
 
-## 追踪信息：
+### 出现时间：
 
-1. com.zzb.examples.controller.monitor.ExamplesMonitorController.testException(ExamplesMonitorController.java:14)
-2. com.zzb.monitor.chain.aop.ProjectTreeAspect.around(ProjectTreeAspect.java:35)
+2021-02-23 11:43:58
 
-## 出现时间：
+### 方法名：**testException**
 
-2021-02-22 17:30:56
+### 路径：
 
-## 链路：
+com.zzb.examples.controller.monitor.ExamplesMonitorController
 
-1. com.zzb.examples.controller.monitor.ExamplesMonitorController.testException(java.lang.Integer)：29ms
+### 参数信息：
+
+1. 1
+
+### 追踪信息：
+
+1. com.zzb.examples.service.impl.ExceptionServiceImpl.getException(ExceptionServiceImpl.java:13)
+1. com.zzb.examples.controller.monitor.ExamplesMonitorController.testException(ExamplesMonitorController.java:17)
+1. com.zzb.monitor.chain.aop.ProjectTreeAspect.around(ProjectTreeAspect.java:36)
+
+### 出现时间：
+
+2021-02-23 11:44:02
+
+### 链路：
+
+1. com.zzb.examples.controller.monitor.ExamplesMonitorController.testException(java.lang.Integer)[2728ms]
+
+   |---	com.zzb.examples.service.impl.ExceptionServiceImpl.getException([I)[10ms]
 

@@ -24,24 +24,24 @@ import java.io.File;
  * @Copyright：www.duia.com Inc. All rights reserved.
  */
 public class InitRunner implements ApplicationRunner {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InitRunner.class);
+    private static final Logger LOG = LoggerFactory.getLogger(InitRunner.class);
 
     @Override
     public void run(ApplicationArguments args) throws Exception {
 
         HanLP.Config.enableDebug(true);
 
-        LOGGER.info("加载词向量模型开始,词向量文件:" + ConfigUtils.hanlpCustomizeVecModelFile + "预加载词向量文件:" + ConfigUtils.hanlpCustomizeVecModelMiniFile);
+        LOG.info("加载词向量模型开始,词向量文件:" + ConfigUtils.hanlpCustomizeVecModelFile + "预加载词向量文件:" + ConfigUtils.hanlpCustomizeVecModelMiniFile);
         File modelMiniFile = new File(ConfigUtils.hanlpCustomizeVecModelMiniFile);
         File modelFile = new File(ConfigUtils.hanlpCustomizeVecModelFile);
 
         if (StringUtils.isEmpty(ConfigUtils.hanlpCustomizeVecModelFile) || !modelFile.exists()) {
-            LOGGER.error(String.format("读取词向量模型失败:hanlpCustomizeVecModelFilePath[%s],hanlpCustomizeVecModelFileFlag[%b]", ConfigUtils.hanlpCustomizeVecModelFile, modelFile.exists()));
+            LOG.error(String.format("读取词向量模型失败:hanlpCustomizeVecModelFilePath[%s],hanlpCustomizeVecModelFileFlag[%b]", ConfigUtils.hanlpCustomizeVecModelFile, modelFile.exists()));
             return;
         }
 
         if (StringUtils.isEmpty(ConfigUtils.hanlpCustomizeVecModelMiniFile) || !modelMiniFile.exists() || ConfigUtils.hanlpCustomizeVecModelFile.equals(ConfigUtils.hanlpCustomizeVecModelMiniFile)) {
-            LOGGER.error(String.format("读取词向量Mini模型失败或与完整模型一致,所以不会读取预加载模型:hanlpCustomizeVecModelMiniFilePath[%s],hanlpCustomizeVecModelMiniFileFlag[%b],直接加载完整模型", ConfigUtils.hanlpCustomizeVecModelMiniFile, modelMiniFile.exists()));
+            LOG.error(String.format("读取词向量Mini模型失败或与完整模型一致,所以不会读取预加载模型:hanlpCustomizeVecModelMiniFilePath[%s],hanlpCustomizeVecModelMiniFileFlag[%b],直接加载完整模型", ConfigUtils.hanlpCustomizeVecModelMiniFile, modelMiniFile.exists()));
             ConfigUtils.hanlpCustomizeVecModelMiniFile = null;
         }
 

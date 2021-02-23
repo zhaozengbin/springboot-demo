@@ -14,7 +14,7 @@ import io.netty.channel.socket.SocketChannel;
  */
 public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 
-    private static final Log LOGGER = Log.get(ChildChannelHandler.class);
+    private static final Log LOG = Log.get(ChildChannelHandler.class);
 
     /**
      * 创建NioSocketChannel成功之后，进行初始化时，
@@ -26,7 +26,7 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
      */
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-        LOGGER.info("--- [通道初始化]");
+        LOG.info("--- [通道初始化]");
         ch.pipeline().addLast(new TimeServerHandler());
     }
 }

@@ -23,17 +23,17 @@ import io.netty.handler.logging.LoggingHandler;
  * 修改备注：TODO
  */
 public class EchoServer {
-    private static final Log LOGGER = Log.get(EchoServer.class);
+    private static final Log LOG = Log.get(EchoServer.class);
 
 
     public void bind(int port) throws Exception {
-        LOGGER.info("--- [绑定端口] {}", port);
+        LOG.info("--- [绑定端口] {}", port);
         // 声明Boss线程组
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         // 声明Worker线程组
         EventLoopGroup workerGroup = new NioEventLoopGroup();
         try {
-            LOGGER.info("--- [启动NIO] ");
+            LOG.info("--- [启动NIO] ");
             // Netty用于启动NIO服务端的辅助启动类，目的是降低服务端的开发复杂度
             ServerBootstrap bootstrap = new ServerBootstrap();
             // 将两个NIO线程组传递到ServerBootStrap中

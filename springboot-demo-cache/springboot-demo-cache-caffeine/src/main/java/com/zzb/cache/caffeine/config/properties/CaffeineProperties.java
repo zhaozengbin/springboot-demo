@@ -2,6 +2,7 @@ package com.zzb.cache.caffeine.config.properties;
 
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 /**
@@ -13,19 +14,19 @@ import org.springframework.stereotype.Component;
  * 修改备注：TODO
  */
 @Data
-@Component
+@Configuration
 public class CaffeineProperties {
 
-    @Value("caffeine.cache.name")
+    @Value("${cache.caffeine.name}")
     private String cacheName;
 
-    @Value("caffeine.cache.initialCapacity")
-    private int initialCapacity;
+    @Value("${cache.caffeine.initialCapacity}")
+    private Integer initialCapacity;
 
-    @Value("caffeine.cache.maximumSize")
-    private int maximumSize;
+    @Value("${cache.caffeine.maximumSize}")
+    private Long maximumSize;
 
-    @Value("caffeine.cache.expireAfterWrite")
-    private int expireAfterWrite;
+    @Value("${cache.caffeine.expireAfterWrite}")
+    private Long expireAfterWrite;
 
 }

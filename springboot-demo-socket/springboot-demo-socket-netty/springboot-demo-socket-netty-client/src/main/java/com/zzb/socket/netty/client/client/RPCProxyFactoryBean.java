@@ -22,7 +22,7 @@ import java.util.UUID;
  */
 public class RPCProxyFactoryBean extends AbstractFactoryBean<Object> implements InvocationHandler {
 
-    private static final Log LOGGER = Log.get(RPCProxyFactoryBean.class);
+    private static final Log LOG = Log.get(RPCProxyFactoryBean.class);
     /**
      * 远程服务接口
      */
@@ -44,7 +44,7 @@ public class RPCProxyFactoryBean extends AbstractFactoryBean<Object> implements 
     @Override
     protected Object createInstance() {
 
-        LOGGER.info("[代理工厂] 初始化代理Bean : {}", interfaceClass);
+        LOG.info("[代理工厂] 初始化代理Bean : {}", interfaceClass);
         // 返回代理类
         return Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, this);
     }
@@ -63,10 +63,10 @@ public class RPCProxyFactoryBean extends AbstractFactoryBean<Object> implements 
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws ErrorParamsException {
 
-        LOGGER.info("{} -> [准备进行远程服务调用] ", this.getClass().getName());
-        LOGGER.info("{} -> [封装调用信息] ", this.getClass().getName());
+        LOG.info("{} -> [准备进行远程服务调用] ", this.getClass().getName());
+        LOG.info("{} -> [封装调用信息] ", this.getClass().getName());
         final MethodInvokeMeta methodInvokeMeta = WrapMethodUtils.readMethod(interfaceClass, method, args);
-        LOGGER.info("{} -> [远程服务调用封装完毕] 调用接口 -> {}\n调用方法 -> {}\n参数列表 -> {} \n 参数类型 -> {}" +
+        LOG.info("{} -> [远程服务调用封装完毕] 调用接口 -> {}\n调用方法 -> {}\n参数列表 -> {} \n 参数类型 -> {}" +
                         "\n 返回值类型 -> {}", this.getClass().getName(), methodInvokeMeta.getInterfaceClass(), methodInvokeMeta.getMethodName()
                 , methodInvokeMeta.getArgs(), methodInvokeMeta.getParameterTypes(), methodInvokeMeta.getReturnType());
         // 构造一个时间戳

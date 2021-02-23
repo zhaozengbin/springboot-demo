@@ -19,7 +19,7 @@ import org.slf4j.LoggerFactory;
 public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
 
 
-    private static final Log LOGGER = Log.get(ChildChannelHandler.class);
+    private static final Log LOG = Log.get(ChildChannelHandler.class);
 
 
     /**
@@ -42,7 +42,7 @@ public class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
      */
     @Override
     protected void initChannel(SocketChannel ch) throws Exception {
-        LOGGER.info("--- [通道初始化]");
+        LOG.info("--- [通道初始化]");
         // region 解决粘包/拆包问题相关代码
         ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
         // 将接收到的对象转成字符串

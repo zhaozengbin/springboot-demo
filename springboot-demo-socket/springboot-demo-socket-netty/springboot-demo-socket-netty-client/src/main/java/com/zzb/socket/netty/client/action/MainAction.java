@@ -18,7 +18,7 @@ import javax.annotation.Resource;
 @Component
 public class MainAction {
 
-    private static final Log LOGGER = Log.get(MainAction.class);
+    private static final Log LOG = Log.get(MainAction.class);
 
     /**
      * 测试业务
@@ -37,22 +37,22 @@ public class MainAction {
     public void call() throws InterruptedException {
         // 用于模拟服务器正常启动后，人工调用远程服务代码
         Thread.sleep(10 * 1000);
-        LOGGER.warn("[准备进行业务测试]");
-        LOGGER.warn("[rpc测试] ");
+        LOG.warn("[准备进行业务测试]");
+        LOG.warn("[rpc测试] ");
         int sum = demoService.sum(5, 8);
-        LOGGER.warn("[rpc测试结果] {}", sum);
-        LOGGER.warn("[字符串测试] ");
+        LOG.warn("[rpc测试结果] {}", sum);
+        LOG.warn("[字符串测试] ");
         String print = demoService.print();
-        LOGGER.warn("[字符串测试结果] {}", print);
-        LOGGER.warn("[对象测试] ");
+        LOG.warn("[字符串测试结果] {}", print);
+        LOG.warn("[对象测试] ");
         User userInfo = demoService.getUserInfo();
-        LOGGER.warn("[对象测试结果] {}", userInfo);
-        LOGGER.warn("[异常测试]");
+        LOG.warn("[对象测试结果] {}", userInfo);
+        LOG.warn("[异常测试]");
         try {
             double division = demoService.division(3, 0);
-            LOGGER.warn("[异常测试结果] {}", division);
+            LOG.warn("[异常测试结果] {}", division);
         } catch (Exception e) {
-            LOGGER.error("[服务器异常] {}", e.getMessage());
+            LOG.error("[服务器异常] {}", e.getMessage());
         }
     }
 }

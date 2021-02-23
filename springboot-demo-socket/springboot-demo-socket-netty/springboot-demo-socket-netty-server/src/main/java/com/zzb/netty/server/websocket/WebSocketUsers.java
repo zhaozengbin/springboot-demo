@@ -26,7 +26,7 @@ public class WebSocketUsers {
      */
     private static final ConcurrentMap<String, Channel> USERS = PlatformDependent.newConcurrentHashMap();
 
-    private static final Log LOGGER = Log.get(WebSocketUsers.class);
+    private static final Log LOG = Log.get(WebSocketUsers.class);
 
     private static WebSocketUsers ourInstance = new WebSocketUsers();
 
@@ -92,7 +92,7 @@ public class WebSocketUsers {
 
         Channel remove = USERS.remove(key);
         boolean containsValue = USERS.containsValue(remove);
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                 "\t├ [移出结果]: {}\n" +
                 "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", containsValue ? "失败" : "成功");
         return containsValue;

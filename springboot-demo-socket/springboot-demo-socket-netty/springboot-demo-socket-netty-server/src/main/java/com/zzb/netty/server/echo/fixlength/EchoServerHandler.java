@@ -16,16 +16,16 @@ import org.slf4j.LoggerFactory;
  */
 public class EchoServerHandler extends ChannelHandlerAdapter {
 
-    private static final Log LOGGER = Log.get(EchoServerHandler.class);
+    private static final Log LOG = Log.get(EchoServerHandler.class);
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        LOGGER.info("--- [发生异常] 释放资源");
+        LOG.info("--- [发生异常] 释放资源");
         ctx.close();
     }
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
-        LOGGER.info("--- [接收到客户端的数据] {}", msg);
+        LOG.info("--- [接收到客户端的数据] {}", msg);
     }
 }

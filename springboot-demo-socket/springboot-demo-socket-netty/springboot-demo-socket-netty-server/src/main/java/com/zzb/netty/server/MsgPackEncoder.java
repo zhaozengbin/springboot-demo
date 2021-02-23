@@ -17,7 +17,7 @@ import org.msgpack.MessagePack;
  */
 public class MsgPackEncoder extends MessageToByteEncoder<Object> {
 
-    private static final Log LOGGER = Log.get(MsgPackEncoder.class);
+    private static final Log LOG = Log.get(MsgPackEncoder.class);
 
     /**
      * 方法：encode
@@ -32,7 +32,7 @@ public class MsgPackEncoder extends MessageToByteEncoder<Object> {
      */
     @Override
     protected void encode(ChannelHandlerContext channelHandlerContext, Object msg, ByteBuf out) throws Exception {
-        LOGGER.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
+        LOG.info("\n\t⌜⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓\n" +
                 "\t├ [编码]: {}\n" +
                 "\t⌞⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓⎓", msg);
         MessagePack messagePack = new MessagePack();

@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class CallTimeAspect {
 
-    private static final Log LOGGER = LogFactory.getLog(CallTimeAspect.class);
+    private static final Log LOG = LogFactory.getLog(CallTimeAspect.class);
 
     // 一分钟，即1000ms
     private static final long ONE_MINUTE = 1000;
@@ -41,7 +41,7 @@ public class CallTimeAspect {
         try {
             obj = joinPoint.proceed(args);
         } catch (Throwable e) {
-            LOGGER.error("统计某方法执行耗时环绕通知出错", e);
+            LOG.error("统计某方法执行耗时环绕通知出错", e);
         }
 
         // 获取执行的方法名
@@ -69,7 +69,7 @@ public class CallTimeAspect {
     private void printExecTime(String methodName, long startTime, long endTime) {
         long diffTime = endTime - startTime;
         if (diffTime > ONE_MINUTE) {
-            LOGGER.warn("-----" + methodName + " 方法执行耗时：" + diffTime + " ms");
+            LOG.warn("-----" + methodName + " 方法执行耗时：" + diffTime + " ms");
         }
     }
 }

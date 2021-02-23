@@ -1,7 +1,5 @@
-cache2k:
-  manager:
-    name: cache2k-demo
-  cache:
+cache:
+  cache2k:
     name: demo
     eternal: true
     entryCapacity: 100

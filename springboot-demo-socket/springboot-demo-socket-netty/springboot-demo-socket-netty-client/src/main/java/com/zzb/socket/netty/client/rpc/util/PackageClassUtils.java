@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class PackageClassUtils {
 
-    private final static Log LOGGER = Log.get(PackageClassUtils.class);
+    private final static Log LOG = Log.get(PackageClassUtils.class);
 
     /**
      * 方法：getAllFile
@@ -40,7 +40,7 @@ public class PackageClassUtils {
             String path = file.getPath();
             String cleanPath = path.replaceAll("/", ".");
             String fileName = cleanPath.substring(cleanPath.indexOf(s), cleanPath.length());
-            LOGGER.info("[加载完成] 类文件：{}", fileName);
+            LOG.info("[加载完成] 类文件：{}", fileName);
             classStrs.add(fileName);
         }
     }
@@ -63,7 +63,7 @@ public class PackageClassUtils {
                 if (file2.isFile()) {
                     String name = file2.getName();
                     String fileName = s + "." + name.substring(0, name.lastIndexOf('.'));
-                    LOGGER.info("[加载完成] 类文件：{}", fileName);
+                    LOG.info("[加载完成] 类文件：{}", fileName);
                     classStrs.add(fileName);
                 }
             }
@@ -86,7 +86,7 @@ public class PackageClassUtils {
         List<String> classStrs = new ArrayList<>();
         // s: com.yyx.util.*
         for (String s : splitFHs) {
-            LOGGER.info("[加载类目录] {}", s);
+            LOG.info("[加载类目录] {}", s);
             // 路径中是否存在".*" com.yyx.util.*
             boolean contains = s.contains(".*");
             if (contains) {

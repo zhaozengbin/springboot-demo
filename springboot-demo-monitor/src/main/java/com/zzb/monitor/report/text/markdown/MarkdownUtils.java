@@ -10,7 +10,7 @@ import com.zzb.monitor.core.entity.ExceptionInfoEntity;
 import java.util.Set;
 
 public class MarkdownUtils {
-    private static final Log LOGGER = Log.get(MarkdownUtils.class);
+    private static final Log LOG = Log.get(MarkdownUtils.class);
 
     public static String exceptionMarkdown(String exceptionName, Set<ExceptionInfoEntity> exceptionInfoEntitySet) {
         String title = String.format("%s", exceptionName);
@@ -30,7 +30,7 @@ public class MarkdownUtils {
             }
         });
         String markdown = simpleMarkdownBuilder.build();
-        LOGGER.info(markdown);
+        LOG.info(markdown);
         return markdown;
     }
 }

@@ -14,12 +14,12 @@ import org.apache.mina.core.session.IoSession;
  * 修改备注：TODO
  */
 public class ClientHandler extends IoHandlerAdapter {
-    private static final Log LOGGER = Log.get(ClientHandler.class);
+    private static final Log LOG = Log.get(ClientHandler.class);
 
     @Override
     public void messageReceived(IoSession session, Object message) throws Exception {
         String address = session.getRemoteAddress().toString();
-        LOGGER.warn("客户端收到[" + address + "]消息：" + message);
+        LOG.warn("客户端收到[" + address + "]消息：" + message);
     }
 
     @Override
