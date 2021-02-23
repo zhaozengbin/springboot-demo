@@ -4,7 +4,6 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.log.Log;
 import cn.hutool.system.SystemUtil;
-import com.alibaba.fastjson.JSON;
 import com.zzb.core.utils.SpringContextUtils;
 import com.zzb.monitor.core.entity.ExceptionInfoEntity;
 
@@ -18,15 +17,16 @@ public class MarkdownUtils {
         SimpleMarkdownBuilder simpleMarkdownBuilder = SimpleMarkdownBuilder.create().title(title, 1);
         simpleMarkdownBuilder.title("项目名：", 2).text(SpringContextUtils.getApplicationContext().getId(), true);
         simpleMarkdownBuilder.title("机器IP：", 2).text(SystemUtil.getHostInfo().getAddress(), true);
+        simpleMarkdownBuilder.title("异常方法：", 2);
         exceptionInfoEntitySet.forEach(exceptionInfoEntity -> {
-            simpleMarkdownBuilder.title("路径：", 2).text(exceptionInfoEntity.getClassName(), true)
-                    .title("方法名：" + SimpleMarkdownBuilder.bold(exceptionInfoEntity.getMethodName()), 2)
-                    .title("参数信息：", 2).orderPoint(exceptionInfoEntity.getParams())
-                    .title("异常信息：", 2).point(exceptionInfoEntity.getExceptionName())
-                    .title("追踪信息：", 2).orderPoint(exceptionInfoEntity.getStackTraceElementList())
-                    .title("出现时间：", 2).text(DateUtil.format(DateUtil.date(exceptionInfoEntity.getTime()), "yyyy-MM-dd HH:mm:ss"), true);
+            simpleMarkdownBuilder
+                    .title("方法名：" + SimpleMarkdownBuilder.bold(exceptionInfoEntity.getMethodName()), 3)
+                    .title("路径：", 3).text(exceptionInfoEntity.getClassName(), true)
+                    .title("参数信息：", 3).orderPoint(exceptionInfoEntity.getParams())
+                    .title("追踪信息：", 3).orderPoint(exceptionInfoEntity.getStackTraceElementSet())
+                    .title("出现时间：", 3).text(DateUtil.format(DateUtil.date(exceptionInfoEntity.getTime()), "yyyy-MM-dd HH:mm:ss"), true);
             if (CollUtil.isNotEmpty(exceptionInfoEntity.getMethodNodeList())) {
-                simpleMarkdownBuilder.title("链路： ", 2).orderPoint(exceptionInfoEntity.getMethodNodeList());
+                simpleMarkdownBuilder.title("链路： ", 3).orderPoint(exceptionInfoEntity.getMethodNodeList());
             }
         });
         String markdown = simpleMarkdownBuilder.build();

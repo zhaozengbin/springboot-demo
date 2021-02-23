@@ -16,6 +16,7 @@ import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.List;
 
 public class DingdingUtils {
     private static final Log LOGGER = Log.get(DingdingUtils.class);
@@ -23,7 +24,7 @@ public class DingdingUtils {
     private static final String DINGDING_URL = "https://oapi.dingtalk.com/robot/send?access_token=%s";
     private static final String DINGDING_URL_SIGN = "&timestamp=%d&sign=%s";
 
-    public static void send(String token, String secret, String mdStr, boolean atAll, String... phones) {
+    public static void send(String token, String secret, List<String> phones, boolean atAll, String mdStr) {
         String url = String.format(DINGDING_URL, token) + signUrl(secret);
         DingTalkClient client = new DefaultDingTalkClient(url);
         OapiRobotSendRequest request = new OapiRobotSendRequest();
@@ -35,7 +36,7 @@ public class DingdingUtils {
         OapiRobotSendRequest.At at = new OapiRobotSendRequest.At();
 
         at.setIsAtAll(atAll);
-        at.setAtMobiles(Arrays.asList(phones));
+        at.setAtMobiles(phones);
         request.setAt(at);
         try {
             OapiRobotSendResponse response = client.execute(request);

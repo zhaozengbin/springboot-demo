@@ -1,8 +1,6 @@
 package com.zzb.monitor.report.text.markdown;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class SimpleMarkdownBuilder {
 
@@ -51,6 +49,15 @@ public class SimpleMarkdownBuilder {
         for (int i = 0; i < list.size(); i++) {
             stringBuilder.append(i + 1).append(". ").append(list.get(i)).append("\n");
         }
+        stringBuilder.append("\n");
+        return this;
+    }
+
+    public SimpleMarkdownBuilder orderPoint(LinkedHashSet<?> set) {
+        int i = 0;
+        set.forEach(value -> {
+            stringBuilder.append(i + 1).append(". ").append(value).append("\n");
+        });
         stringBuilder.append("\n");
         return this;
     }

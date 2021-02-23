@@ -73,8 +73,8 @@ public class MonitorProperties {
         return getPropertiesValue(exception, EXCEPTION_DINGDING_SIGN_KEY) == null ? getPropertiesValue(DEFAULT_KEY, EXCEPTION_DINGDING_SIGN_KEY) : getPropertiesValue(exception, EXCEPTION_DINGDING_SIGN_KEY);
     }
 
-    public static String getDingdingAtAll(String exception) {
-        return getPropertiesValue(exception, EXCEPTION_DINGDING_AT_ALL_KEY) == null ? getPropertiesValue(DEFAULT_KEY, EXCEPTION_DINGDING_AT_ALL_KEY) : getPropertiesValue(exception, EXCEPTION_DINGDING_AT_ALL_KEY);
+    public static boolean getDingdingAtAll(String exception) {
+        return getPropertiesValue(exception, EXCEPTION_DINGDING_AT_ALL_KEY) == null ? Boolean.getBoolean(getPropertiesValue(DEFAULT_KEY, EXCEPTION_DINGDING_AT_ALL_KEY)) : Boolean.getBoolean(getPropertiesValue(exception, EXCEPTION_DINGDING_AT_ALL_KEY));
     }
 
     public static List<String> getDingdingAt(String exception) {

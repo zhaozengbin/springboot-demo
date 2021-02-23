@@ -4,6 +4,7 @@ import com.zzb.monitor.chain.db.entity.MethodNode;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Data
@@ -13,7 +14,7 @@ public class ExceptionInfoEntity {
 
     private String exceptionName;
 
-    private List<StackTraceElement> stackTraceElementList;
+    private LinkedHashSet<StackTraceElement> stackTraceElementSet;
 
     private long time;
 

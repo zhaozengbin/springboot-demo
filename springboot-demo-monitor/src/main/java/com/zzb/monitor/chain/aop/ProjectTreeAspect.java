@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 import java.security.SecureRandom;
 
-@Component
 @Aspect
+@Component
 public class ProjectTreeAspect {
 
     //声明切点
@@ -34,8 +34,6 @@ public class ProjectTreeAspect {
             try {
                 AroundMethod.playBeforeMethod(pjp, identify);
                 obj = pjp.proceed();
-            } catch (Throwable throwable) {
-                throw throwable;
             } finally {
                 AroundMethod.playAfterMethod(pjp, identify, obj);
             }

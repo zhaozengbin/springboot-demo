@@ -34,16 +34,16 @@ public class Cache2kExceptionCacheListener implements CacheEntryExpiredListener,
         Set<ExceptionInfoEntity> exceptionInfoEntitySet = (Set) cacheEntry.getValue();
         ExceptionInfoEntity exceptionInfoEntity = exceptionInfoEntitySet.stream().findFirst().get();
 
-        if (exceptionInfoEntity.getStackTraceElementList().size() >= MonitorProperties.getExceptionThreshold(exceptionInfoEntity.getExceptionName())) {
+        if (exceptionInfoEntity.getStackTraceElementSet().size() >= MonitorProperties.getExceptionThreshold(exceptionInfoEntity.getExceptionName())) {
             String exName = exceptionInfoEntity.getExceptionName();
             if (cache.keys().size() >= MonitorProperties.getExceptionThreshold(exName)) {
                 //开始发送警告
                 String msg = MarkdownUtils.exceptionMarkdown(exName, exceptionInfoEntitySet);
-                DingdingUtils.send("a456b3ae219e760b021509bbdec37ed62c56d5d33ff6345c71d1fc26f0ec3f29",
-                        "SECa26d9f5128da05852c4ba432ecf4e0d2dbdbc5ff5037ac88b2f042889cf2c04f",
-                        msg,
-                        false,
-                        "13466663949");
+                DingdingUtils.send(MonitorProperties.getDingdingToken(exName),
+                        MonitorProperties.getDingdingSign(exName),
+                        MonitorProperties.getDingdingAt(exName),
+                        MonitorProperties.getDingdingAtAll(exName),
+                        msg);
                 LOG.info(msg);
             }
         }
@@ -54,14 +54,15 @@ public class Cache2kExceptionCacheListener implements CacheEntryExpiredListener,
         Set<ExceptionInfoEntity> exceptionInfoEntitySet = (Set) cacheEntry.getValue();
         ExceptionInfoEntity exceptionInfoEntity = exceptionInfoEntitySet.stream().findFirst().get();
 
-        if (exceptionInfoEntity.getStackTraceElementList().size() >= MonitorProperties.getExceptionThreshold(exceptionInfoEntity.getExceptionName())) {
+        if (exceptionInfoEntity.getStackTraceElementSet().size() >= MonitorProperties.getExceptionThreshold(exceptionInfoEntity.getExceptionName())) {
             String exName = exceptionInfoEntity.getExceptionName();
             //开始发送警告
             String msg = MarkdownUtils.exceptionMarkdown(exName, exceptionInfoEntitySet);
-            DingdingUtils.send("a456b3ae219e760b021509bbdec37ed62c56d5d33ff6345c71d1fc26f0ec3f29",
-                    "SECa26d9f5128da05852c4ba432ecf4e0d2dbdbc5ff5037ac88b2f042889cf2c04f",
-                    msg, false,
-                    "13466663949");
+            DingdingUtils.send(MonitorProperties.getDingdingToken(exName),
+                    MonitorProperties.getDingdingSign(exName),
+                    MonitorProperties.getDingdingAt(exName),
+                    MonitorProperties.getDingdingAtAll(exName),
+                    msg);
             LOG.info(msg);
         }
     }

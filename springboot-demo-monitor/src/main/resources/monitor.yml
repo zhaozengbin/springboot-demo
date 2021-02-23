@@ -2,7 +2,7 @@ monitor:
   exception:
     stress: root,NullPointerException
     root:
-      threshold: 2
+      threshold: 1
       dingding:
         token: xxx
         sign: xxx

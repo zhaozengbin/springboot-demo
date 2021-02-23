@@ -53,12 +53,12 @@ public class ExceptionAspect {
         String className = jp.getSignature().getDeclaringTypeName();
         String methodName = jp.getSignature().getName();
         Object[] params = jp.getArgs();
-        List<StackTraceElement> list = stackTrace(e, "com.zzb");
+        LinkedHashSet<StackTraceElement> set = stackTrace(e, "com.zzb");
         List<MethodNode> methodNodeList = methodNodeService.findAllByFullName(className, methodName);
         ExceptionInfoEntity exceptionInfoEntity = new ExceptionInfoEntity(
                 SessionUtils.getSessionId(),
                 exceptionName.substring(exceptionName.lastIndexOf(".") + 1),
-                list,
+                set,
                 System.currentTimeMillis(),
                 className,
                 methodName,
@@ -89,21 +89,21 @@ public class ExceptionAspect {
         cache.put(exceptionName, exceptionInfoEntitySet);
     }
 
-    private List<StackTraceElement> stackTrace(Throwable throwable, String filterTrace) {
-        List<StackTraceElement> list = new LinkedList<StackTraceElement>();
-        addStackTrace(list, throwable, filterTrace);
+    private LinkedHashSet<StackTraceElement> stackTrace(Throwable throwable, String filterTrace) {
+        LinkedHashSet<StackTraceElement> set = new LinkedHashSet<>();
+        addStackTrace(set, throwable, filterTrace);
         Throwable cause = throwable.getCause();
         while (cause != null) {
-            addStackTrace(list, cause, filterTrace);
+            addStackTrace(set, cause, filterTrace);
             cause = cause.getCause();
         }
-        return list;
+        return set;
     }
 
-    private void addStackTrace(List<StackTraceElement> list, Throwable throwable, String filterTrace) {
-        list.addAll(0,
-                Arrays.stream(throwable.getStackTrace())
-                        .filter(x -> filterTrace == null ? true : x.getClassName().startsWith(filterTrace))
-                        .filter(x -> !x.getFileName().equals("<generated>")).collect(Collectors.toList()));
+    private void addStackTrace(LinkedHashSet<StackTraceElement> set, Throwable throwable, String filterTrace) {
+        Set<StackTraceElement> setTemp = Arrays.stream(throwable.getStackTrace())
+                .filter(x -> filterTrace == null ? true : x.getClassName().startsWith(filterTrace))
+                .filter(x -> !x.getFileName().equals("<generated>")).collect(Collectors.toSet());
+        set.addAll(setTemp);
     }
 }
