@@ -1,0 +1,8 @@
+cache2k:
+  manager:
+    name: cache2k-demo
+  cache:
+    name: demo
+    eternal: true
+    entryCapacity: 100
+    expireAfterWrite: 10

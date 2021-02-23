@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 @Slf4j
 @Service
-@CacheConfig(cacheNames = "caffeineCacheManager")
+@CacheConfig(cacheNames = "caffeineCacheSpringManager")
 public class UserInfoEntityServiceImpl implements UserInfoEntityService {
 
     /**

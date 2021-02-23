@@ -3,6 +3,9 @@ package com.zzb.cache.caffeine.config;
 import com.github.benmanes.caffeine.cache.Cache;
 import com.github.benmanes.caffeine.cache.CacheLoader;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.zzb.cache.caffeine.config.properties.CaffeineProperties;
+import com.zzb.cache.caffeine.listener.CaffeineListener;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cache.caffeine.CaffeineCacheManager;
 import org.springframework.context.annotation.Bean;
@@ -14,25 +17,46 @@ import java.util.concurrent.TimeUnit;
 @Configuration
 @EnableCaching
 public class CaffeineConfiguration {
-    @Bean
-    public Caffeine caffeineConfig() {
-        return Caffeine.newBuilder().expireAfterWrite(60, TimeUnit.MINUTES);
-    }
+
+    @Autowired
+    private CaffeineProperties caffeineProperties;
+
+    @Autowired
+    private CaffeineListener caffeineListener;
 
     /**
      * 方法：caffeineCacheManager
      * 描述：集成方式一
      * 作者：赵增斌 E-mail:zhaozengbin@gmail.com QQ:4415599 weibo:http://weibo.com/zhaozengbin
      *
-     * @param caffeine :
      * @return : org.springframework.cache.CacheManager
      * @date: 2021年02月05日 11:43 上午
      */
-    @Bean("caffeineCacheManager")
-    public CaffeineCacheManager caffeineCacheManager(Caffeine caffeine) {
-        CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager();
-        caffeineCacheManager.setCaffeine(caffeine);
+    @Bean("caffeineSpringCacheManager")
+    public CaffeineCacheManager caffeineCacheManager() {
+        CaffeineCacheManager caffeineCacheManager = new CaffeineCacheManager(caffeineProperties.getCacheName());
+        caffeineCacheManager.setCaffeine(Caffeine.newBuilder()
+                .writer(caffeineListener)
+                // 设置最后一次写入或访问后经过固定时间过期
+                .expireAfterWrite(caffeineProperties.getExpireAfterWrite(), TimeUnit.SECONDS)
+                // 初始的缓存空间大小
+                .initialCapacity(caffeineProperties.getInitialCapacity())
+                // 缓存的最大条数
+                .maximumSize(caffeineProperties.getMaximumSize()));
         return caffeineCacheManager;
+    }
+
+    /**
+     * 方法：caffeineCache
+     * 描述：集成方式二
+     * 作者：赵增斌 E-mail:zhaozengbin@gmail.com QQ:4415599 weibo:http://weibo.com/zhaozengbin
+     *
+     * @return : org.springframework.cache.CacheManager
+     * @date: 2021年02月05日 11:43 上午
+     */
+    @Bean("caffeineSpringCache")
+    public org.springframework.cache.Cache caffeineSpringCache() {
+        return caffeineCacheManager().getCache(caffeineProperties.getCacheName());
     }
 
     /**

@@ -14,6 +14,7 @@
     <modules>
         <module>springboot-demo-cache-cache2k</module>
         <module>springboot-demo-cache-caffeine</module>
+        <module>springboot-demo-cache-guava</module>
     </modules>
 
     <properties>
@@ -25,6 +26,10 @@
             <groupId>com.zzb</groupId>
             <artifactId>springboot-demo-core</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-cache</artifactId>
         </dependency>
     </dependencies>
 </project>

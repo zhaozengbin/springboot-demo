@@ -5,3 +5,9 @@ spring:
       - userCache
     caffeine:
       spec: initialCapacity=50,maximumSize=500,expireAfterWrite=10s,refreshAfterWrite=5s # 需要配合 CacheLoader
+caffeine:
+  cache:
+    name: demo
+    initialCapacity: 10
+    maximumSize: 100
+    expireAfterWrite: 10
