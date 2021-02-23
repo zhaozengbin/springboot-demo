@@ -29,7 +29,7 @@ public class Cache2kExceptionConfiguration {
                 b.name("cache2kException")
                         .eternal(true)
                         .entryCapacity(100)
-                        .expireAfterWrite(10, TimeUnit.SECONDS)
+                        .expireAfterWrite(60, TimeUnit.SECONDS)
                         .addListener(cache2kExceptionCacheListener));
         return springCache2kCacheManager;
     }

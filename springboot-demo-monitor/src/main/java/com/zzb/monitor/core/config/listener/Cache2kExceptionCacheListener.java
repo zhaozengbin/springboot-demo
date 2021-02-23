@@ -1,5 +1,6 @@
 package com.zzb.monitor.core.config.listener;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.log.Log;
 import com.alibaba.fastjson.JSON;
 import com.zzb.core.utils.DingdingUtils;
@@ -18,6 +19,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Component
 public class Cache2kExceptionCacheListener implements CacheEntryExpiredListener, CacheEntryCreatedListener, CacheEntryUpdatedListener {
@@ -31,37 +33,28 @@ public class Cache2kExceptionCacheListener implements CacheEntryExpiredListener,
 
     @Override
     public void onEntryCreated(Cache cache, CacheEntry cacheEntry) throws Exception {
-        Set<ExceptionInfoEntity> exceptionInfoEntitySet = (Set) cacheEntry.getValue();
-        ExceptionInfoEntity exceptionInfoEntity = exceptionInfoEntitySet.stream().findFirst().get();
-
-        if (exceptionInfoEntity.getStackTraceElementSet().size() >= MonitorProperties.getExceptionThreshold(exceptionInfoEntity.getExceptionName())) {
-            String exName = exceptionInfoEntity.getExceptionName();
-            if (cache.keys().size() >= MonitorProperties.getExceptionThreshold(exName)) {
-                //开始发送警告
-                String msg = MarkdownUtils.exceptionMarkdown(exName, exceptionInfoEntitySet);
-                DingdingUtils.send(MonitorProperties.getDingdingToken(exName),
-                        MonitorProperties.getDingdingSign(exName),
-                        MonitorProperties.getDingdingAt(exName),
-                        MonitorProperties.getDingdingAtAll(exName),
-                        msg);
-                LOG.info(msg);
-            }
-        }
+        sendMsg(cacheEntry);
     }
 
     @Override
     public void onEntryUpdated(Cache cache, CacheEntry cacheEntry, CacheEntry cacheEntry1) throws Exception {
-        Set<ExceptionInfoEntity> exceptionInfoEntitySet = (Set) cacheEntry.getValue();
-        ExceptionInfoEntity exceptionInfoEntity = exceptionInfoEntitySet.stream().findFirst().get();
+        sendMsg(cacheEntry);
+    }
 
-        if (exceptionInfoEntity.getStackTraceElementSet().size() >= MonitorProperties.getExceptionThreshold(exceptionInfoEntity.getExceptionName())) {
-            String exName = exceptionInfoEntity.getExceptionName();
+    private void sendMsg(CacheEntry cacheEntry) {
+        String exceptionName = (String) cacheEntry.getKey();
+        List<ExceptionInfoEntity> exceptionInfoEntityList = (List) cacheEntry.getValue();
+        int threshold = MonitorProperties.getExceptionThreshold(exceptionName);
+        if (exceptionInfoEntityList.size() < threshold) {
+            exceptionInfoEntityList = exceptionInfoEntityList.stream().filter(value -> (value.getExceptionCount() > threshold)).collect(Collectors.toList());
+        }
+        if (CollUtil.isNotEmpty(exceptionInfoEntityList)) {
             //开始发送警告
-            String msg = MarkdownUtils.exceptionMarkdown(exName, exceptionInfoEntitySet);
-            DingdingUtils.send(MonitorProperties.getDingdingToken(exName),
-                    MonitorProperties.getDingdingSign(exName),
-                    MonitorProperties.getDingdingAt(exName),
-                    MonitorProperties.getDingdingAtAll(exName),
+            String msg = MarkdownUtils.exceptionMarkdown(exceptionName, threshold, exceptionInfoEntityList);
+            DingdingUtils.send(MonitorProperties.getDingdingToken(exceptionName),
+                    MonitorProperties.getDingdingSign(exceptionName),
+                    MonitorProperties.getDingdingAt(exceptionName),
+                    MonitorProperties.getDingdingAtAll(exceptionName),
                     msg);
             LOG.info(msg);
         }

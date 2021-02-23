@@ -63,6 +63,7 @@ public class ExceptionAspect {
                 className,
                 methodName,
                 params,
+                0,
                 methodNodeList);
         cache2KCache(exceptionName, exceptionInfoEntity);
 //        caffeineCache(exceptionName, exceptionInfoEntity);
@@ -78,15 +79,22 @@ public class ExceptionAspect {
 
 
     private void cache(Cache cache, String exceptionName, ExceptionInfoEntity exceptionInfoEntity) {
-        Set<ExceptionInfoEntity> exceptionInfoEntitySet = cache.get(exceptionName, HashSet.class);
+        List<ExceptionInfoEntity> exceptionInfoEntityList = cache.get(exceptionName, ArrayList.class);
 
-        if (CollUtil.isEmpty(exceptionInfoEntitySet)) {
-            exceptionInfoEntitySet = new HashSet<>();
-        } else if (exceptionInfoEntitySet.contains(exceptionInfoEntity)) {
-            return;
+        if (CollUtil.isEmpty(exceptionInfoEntityList)) {
+            exceptionInfoEntityList = new ArrayList<>();
         }
-        exceptionInfoEntitySet.add(exceptionInfoEntity);
-        cache.put(exceptionName, exceptionInfoEntitySet);
+
+        if (exceptionInfoEntityList.contains(exceptionInfoEntity)) {
+            ExceptionInfoEntity temp = exceptionInfoEntityList.get(exceptionInfoEntityList.indexOf(exceptionInfoEntity));
+            exceptionInfoEntity.setExceptionCount(temp.getExceptionCount() + 1);
+
+            exceptionInfoEntityList.remove(temp);
+        } else {
+            exceptionInfoEntity.setExceptionCount(1);
+        }
+        exceptionInfoEntityList.add(exceptionInfoEntity);
+        cache.put(exceptionName, exceptionInfoEntityList);
     }
 
     private LinkedHashSet<StackTraceElement> stackTrace(Throwable throwable, String filterTrace) {
