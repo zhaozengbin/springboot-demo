@@ -1,8 +1,10 @@
 package com.zzb.monitor.report.text.markdown;
 
-import com.zzb.monitor.chain.db.entity.MethodNode;
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.util.ArrayUtil;
 
 import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class SimpleMarkdownBuilder {
 
@@ -32,43 +34,33 @@ public class SimpleMarkdownBuilder {
     }
 
     public SimpleMarkdownBuilder point(List<?> contentList) {
-        if (contentList != null && contentList.size() > 0) {
-            contentList.forEach(x -> stringBuilder.append("- ").append(x).append("\n"));
-            stringBuilder.append("\n");
-        }
-        return this;
+        return orderPoint(contentList, false);
     }
 
     public SimpleMarkdownBuilder point(Object... contentList) {
-        if (contentList != null && contentList.length > 0) {
-            Arrays.stream(contentList).forEach(x -> stringBuilder.append("- ").append(x).append("\n"));
-            stringBuilder.append("\n");
-        }
-        return this;
+        return orderPoint(contentList, false);
     }
 
     public SimpleMarkdownBuilder orderPoint(List<?> list) {
-        for (int i = 0; i < list.size(); i++) {
-            stringBuilder.append(i + 1).append(". ").append(list.get(i)).append("\n");
-        }
-        stringBuilder.append("\n");
-        return this;
+        return orderPoint(list, true);
     }
 
     public SimpleMarkdownBuilder orderPoint(LinkedHashSet<?> set) {
-        int i = 0;
-        set.forEach(value -> {
-            stringBuilder.append(i + 1).append(". ").append(value).append("\n");
-        });
-        stringBuilder.append("\n");
-        return this;
+        return orderPoint(set, true);
     }
 
     public SimpleMarkdownBuilder orderPoint(Object... list) {
-        for (int i = 0; i < list.length; i++) {
-            stringBuilder.append(i + 1).append(". ").append(list[i]).append("\n");
+        return orderPoint(ArrayUtil.isNotEmpty(list) ? CollUtil.newArrayList(list) : null, true);
+    }
+
+    private SimpleMarkdownBuilder orderPoint(Collection<?> coll, boolean isOrder) {
+        if (CollUtil.isNotEmpty(coll)) {
+            int i = 0;
+            coll.forEach(value -> {
+                stringBuilder.append(isOrder ? i + 1 : "- ").append(". ").append(value).append("\n");
+            });
+            stringBuilder.append("\n");
         }
-        stringBuilder.append("\n");
         return this;
     }
 
@@ -105,8 +97,18 @@ public class SimpleMarkdownBuilder {
         return this;
     }
 
-    public SimpleMarkdownBuilder horizon(){
+    public SimpleMarkdownBuilder horizon() {
         stringBuilder.append("***");
+        return this;
+    }
+
+    public SimpleMarkdownBuilder at(List<String> ats) {
+        if (CollUtil.isNotEmpty(ats)) {
+            ats.forEach(value -> {
+                stringBuilder.append("@").append(value);
+            });
+            stringBuilder.append("\n");
+        }
         return this;
     }
 

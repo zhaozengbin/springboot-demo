@@ -17,12 +17,15 @@ import java.util.List;
 public class MarkdownUtils {
     private static final Log LOG = Log.get(MarkdownUtils.class);
 
-    public static String exceptionMarkdown(String exceptionName, int threshold, List<ExceptionInfoEntity> exceptionInfoEntityList) {
+    public static String exceptionMarkdown(String exceptionName, int threshold, List<ExceptionInfoEntity> exceptionInfoEntityList, List<String> ats) {
         String title = String.format("%s", exceptionName);
         SimpleMarkdownBuilder simpleMarkdownBuilder = SimpleMarkdownBuilder.create().title(title, 1);
         simpleMarkdownBuilder.title("项目名：" + SpringContextUtils.getApplicationContext().getId(), 2);
         simpleMarkdownBuilder.title("机器IP：" + SystemUtil.getHostInfo().getAddress(), 2);
         simpleMarkdownBuilder.title("报警阈值：" + threshold, 2);
+        if (CollUtil.isNotEmpty(ats)) {
+            simpleMarkdownBuilder.title("负责人：", 2).at(ats);
+        }
         simpleMarkdownBuilder.title("异常方法：", 2);
         exceptionInfoEntityList.forEach(exceptionInfoEntity -> {
             simpleMarkdownBuilder.horizon().nextLine();

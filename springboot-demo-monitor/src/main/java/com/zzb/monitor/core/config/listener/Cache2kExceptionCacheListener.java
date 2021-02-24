@@ -50,7 +50,7 @@ public class Cache2kExceptionCacheListener implements CacheEntryExpiredListener,
         }
         if (CollUtil.isNotEmpty(exceptionInfoEntityList)) {
             //开始发送警告
-            String msg = MarkdownUtils.exceptionMarkdown(exceptionName, threshold, exceptionInfoEntityList);
+            String msg = MarkdownUtils.exceptionMarkdown(exceptionName, threshold, exceptionInfoEntityList,MonitorProperties.getDingdingAt(exceptionName));
             DingdingUtils.send(MonitorProperties.getDingdingToken(exceptionName),
                     MonitorProperties.getDingdingSign(exceptionName),
                     MonitorProperties.getDingdingAt(exceptionName),
