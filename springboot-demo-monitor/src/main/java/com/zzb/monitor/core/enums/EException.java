@@ -61,6 +61,6 @@ public enum EException {
      * @date: 2021/2/23 10:35 上午
      */
     public static EException getExceptionForIndex(int index) {
-        return Arrays.asList(EException.values()).get(index);
+        return Arrays.asList(EException.values()).get(index - 1);
     }
 }

@@ -49,7 +49,7 @@ public class ExceptionAspect {
      */
     @AfterThrowing(pointcut = "pointcut()", throwing = "e")
     public void handleThrowing(JoinPoint jp, Exception e) {
-        String exceptionName = e.getClass().getName();
+        String exceptionName = e.getMessage();
         String className = jp.getSignature().getDeclaringTypeName();
         String methodName = jp.getSignature().getName();
         Object[] params = jp.getArgs();

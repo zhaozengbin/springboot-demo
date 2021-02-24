@@ -214,23 +214,22 @@ public class MethodNode implements Serializable {
         this.methodNodes = methodNodes;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder result = new StringBuilder();
-        result.append(this.getFullName());
-        result.append("[");
-        result.append(this.getEndTime().getTime() - this.getStartTime().getTime());
-        result.append("ms]");
-        if (CollUtil.isNotEmpty(getMethodNodes())) {
-            getMethodNodes().forEach(value -> {
-                result.append("\n\n\t");
-                result.append("|---\t");
-                result.append(value.getFullName());
-                result.append("[");
-                result.append(value.getEndTime().getTime() - value.getStartTime().getTime());
-                result.append("ms]");
-            });
-        }
-        return result.toString();
-    }
+//    @Override
+//    public String toString() {
+//        StringBuilder result = new StringBuilder("> ");
+//        result.append(this.getFullName());
+//        result.append("[");
+//        result.append(this.getEndTime().getTime() - this.getStartTime().getTime());
+//        result.append("ms]");
+//        if (CollUtil.isNotEmpty(getMethodNodes())) {
+//            getMethodNodes().forEach(value -> {
+//                result.append("\n\n\t");
+//                result.append("> ");
+//                result.append("\t");
+//                result.append("|---");
+//                result.append(value);
+//            });
+//        }
+//        return result.toString();
+//    }
 }

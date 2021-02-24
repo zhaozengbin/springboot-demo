@@ -1,5 +1,7 @@
 package com.zzb.monitor.report.text.markdown;
 
+import com.zzb.monitor.chain.db.entity.MethodNode;
+
 import java.util.*;
 
 public class SimpleMarkdownBuilder {
@@ -100,6 +102,11 @@ public class SimpleMarkdownBuilder {
 
     public SimpleMarkdownBuilder nextLine() {
         stringBuilder.append("\n");
+        return this;
+    }
+
+    public SimpleMarkdownBuilder horizon(){
+        stringBuilder.append("***");
         return this;
     }
 
