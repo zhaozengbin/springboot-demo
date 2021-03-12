@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: @environment@
+  application:
+    name: spring-boot-admin
+  mvc:
+    static-path-pattern: /static/**
+  thymeleaf:
+    cache: false
+    check-template: false
+    mode: HTML5
+    encoding: UTF-8
+    prefix: classpath:/templates/
+    suffix: .html
+    servlet:
+      content-type: text/html
+devtools:
+  restart:
+    #热部署生效
+    enabled: true
+    #设置重启的目录
+    additional-paths: resources/**,static/**,templates/**
+    #该目录下的内容修改不重启
+    exclude: data/**
+---
+
+# tag::customization-external-views[]
+spring:
+  boot:
+    admin:
+      ui:
+        cache:
+          no-cache: true
+        external-views:
+          - label: "诊断服务"
+            url: /arthas/index
+            order: 2000

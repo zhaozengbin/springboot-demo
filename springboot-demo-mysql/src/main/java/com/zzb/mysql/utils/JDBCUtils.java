@@ -42,6 +42,7 @@ public class JDBCUtils {
             driver = pro.getProperty("driver");
             //4.注册驱动
             Class.forName(driver);
+            System.out.println(DriverManager.getLoginTimeout());
         } catch (IOException e) {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
@@ -58,7 +59,6 @@ public class JDBCUtils {
      * @date: 2020年09月23日 10:36 上午
      */
     public static Connection getConnection() throws SQLException {
-
         Connection conn = DriverManager.getConnection(url, user, password);
         return conn;
     }

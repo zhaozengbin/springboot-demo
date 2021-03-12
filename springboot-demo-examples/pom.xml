@@ -63,8 +63,14 @@
             <artifactId>springboot-demo-monitor</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.zzb</groupId>
+            <artifactId>springboot-demo-redis</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
 
-<!--        <dependency>-->
+        <!--        <dependency>-->
 <!--            <groupId>cn.langpy</groupId>-->
 <!--            <artifactId>ko-time</artifactId>-->
 <!--            <version>1.6</version>-->

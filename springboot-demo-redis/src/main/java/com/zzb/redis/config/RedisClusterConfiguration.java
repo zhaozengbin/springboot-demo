@@ -54,7 +54,7 @@ public class RedisClusterConfiguration {
         org.springframework.data.redis.connection.RedisClusterConfiguration clusterConfig = new org.springframework.data.redis.connection.RedisClusterConfiguration(nodeList);
         clusterConfig.setMaxRedirects(3);
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(clusterConfig, clientConfig);
-        lettuceConnectionFactory.afterPropertiesSet();
+//        lettuceConnectionFactory.afterPropertiesSet();
         return lettuceConnectionFactory;
 
     }

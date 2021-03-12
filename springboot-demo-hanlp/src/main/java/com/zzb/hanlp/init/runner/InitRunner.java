@@ -21,7 +21,6 @@ import java.io.File;
  * 修改时间：2019-08-01 15:53
  * 修改备注：TODO
  *
- * @Copyright：www.duia.com Inc. All rights reserved.
  */
 public class InitRunner implements ApplicationRunner {
     private static final Logger LOG = LoggerFactory.getLogger(InitRunner.class);

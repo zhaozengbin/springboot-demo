@@ -23,7 +23,6 @@ import static com.hankcs.hanlp.corpus.tag.Nature.*;
  * 修改时间：2019-08-06 14:36
  * 修改备注：TODO
  *
- * @Copyright：www.duia.com Inc. All rights reserved.
  */
 public class InitConfigThread implements Runnable {
     private static final Logger LOG = LoggerFactory.getLogger(InitConfigThread.class);

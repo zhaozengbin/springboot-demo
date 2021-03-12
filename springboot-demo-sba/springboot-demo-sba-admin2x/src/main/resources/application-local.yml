@@ -1,0 +1,15 @@
+server:
+  port: 8500
+spring:
+  security:
+    user:
+      name: root
+      password: root
+  boot:
+    admin:
+      context-path: / # 项目名称，当然也可以不填啦
+arthas:
+  server-domain: http://localhost:8888
+  server-ws-url: ws://localhost:9999/ws
+#    server-ws-ip: 172.16.229.212
+#    server-ws-port: 9999

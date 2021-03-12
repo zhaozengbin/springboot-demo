@@ -34,6 +34,8 @@
         <module>springboot-demo-socket</module>
         <module>springboot-demo-monitor</module>
         <module>springboot-demo-cache</module>
+        <module>springboot-demo-log</module>
+        <module>springboot-demo-sba</module>
     </modules>
 
     <dependencies>

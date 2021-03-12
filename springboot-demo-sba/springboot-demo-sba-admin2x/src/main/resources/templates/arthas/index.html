@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>在线诊断</title>
+</head>
+
+<body>
+<script th:src="@{/static/js/jquery-3.6.0.min.js}"></script>
+<script th:src="@{/static/layer/layer.js}"></script>
+<script>
+    layer.prompt({
+        title: '请输入诊断应用ID',
+        formType: 0,
+        offset: ['40%', '40%']
+    }, function (appId, index) {
+        $.get("/arthas/start?appId=" + appId, function (data, status) {
+            debugger;
+            if (status) {
+                if (data) {
+                    if (data.serverUrl) {
+                        let msg = "名称：" + data.serviceName + "<br/>凭证：" + data.appId + "<br/>地址：" + data.serviceUrl + "<br/><center>Artash启动</center>";
+                        layer.alert(msg, {
+                            skin: 'layui-layer-lv' //样式类名
+                            , closeBtn: 0
+                        }, function () {
+                            window.location = data.serverUrl;
+                        });
+                        return;
+                    }
+                    layer.msg(data.msg);
+                    layer.close(index);
+                    return;
+                }
+            }
+            layer.close(index);
+        });
+    });
+</script>
+</body>
+</html>

@@ -36,7 +36,7 @@ public enum EException {
     /**
      * 方法：random
      * 描述：获取随机异常
-     * 作者：赵增斌 E-mail:zhaozengbin@duia.com
+     * 作者：赵增斌 E-mail:4415599@qq.com
      *
      * @return : com.zzb.monitor.core.enums.EException
      * @date: 2021/2/23 10:34 上午
@@ -54,7 +54,7 @@ public enum EException {
     /**
      * 方法：getExceptionForIndex
      * 描述：指定下标获取异常
-     * 作者：赵增斌 E-mail:zhaozengbin@duia.com
+     * 作者：赵增斌 E-mail:4415599@qq.com
      *
      * @param index :
      * @return : com.zzb.monitor.core.enums.EException

@@ -1,5 +1,11 @@
 package com.zzb.core.utils;
 
+import cn.hutool.http.ContentType;
+import cn.hutool.http.HttpRequest;
+import cn.hutool.http.HttpResponse;
+import cn.hutool.http.HttpUtil;
+import cn.hutool.json.JSONObject;
+
 import javax.servlet.http.HttpServletRequest;
 
 public class HttpUtils {
@@ -25,5 +31,19 @@ public class HttpUtils {
         }
         return String.format(url, agreement, serverName, portStr, contextPath);
 
+    }
+
+    public static String get(String serverUrl) {
+        return HttpUtil.get(serverUrl);
+    }
+
+    public static HttpResponse post(String serverUrl, JSONObject body) {
+        return post(serverUrl, body.toString());
+    }
+
+    public static HttpResponse post(String serverUrl, String body) {
+        HttpRequest httpRequest = HttpUtil.createPost(serverUrl);
+        httpRequest.body(body, ContentType.JSON.getValue());
+        return httpRequest.execute();
     }
 }
