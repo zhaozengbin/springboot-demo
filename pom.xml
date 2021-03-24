@@ -36,6 +36,7 @@
         <module>springboot-demo-cache</module>
         <module>springboot-demo-log</module>
         <module>springboot-demo-sba</module>
+        <module>springboot-demo-jms</module>
     </modules>
 
     <dependencies>
