@@ -37,6 +37,7 @@
         <module>springboot-demo-log</module>
         <module>springboot-demo-sba</module>
         <module>springboot-demo-jms</module>
+        <module>springboot-demo-test</module>
     </modules>
 
     <dependencies>

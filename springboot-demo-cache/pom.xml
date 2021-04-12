@@ -14,7 +14,6 @@
     <modules>
         <module>springboot-demo-cache-cache2k</module>
         <module>springboot-demo-cache-caffeine</module>
-        <module>springboot-demo-cache-guava</module>
     </modules>
 
     <properties>

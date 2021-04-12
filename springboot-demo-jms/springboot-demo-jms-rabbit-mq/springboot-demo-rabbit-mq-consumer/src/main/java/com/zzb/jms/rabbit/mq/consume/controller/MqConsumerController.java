@@ -1,7 +1,7 @@
 package com.zzb.jms.rabbit.mq.consume.controller;
 
+import cn.hutool.extra.spring.SpringUtil;
 import com.zzb.jms.rabbit.mq.consume.handler.QueueService;
-import com.zzb.jms.consume.utils.SpringUtil;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
